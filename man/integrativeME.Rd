@@ -14,7 +14,7 @@ integrativeME(
 	data.cont,
 	type,
 	select = c('RF', 'student', 'sPLS'),
-	method = c('logreg', 'indep', 'loc'),
+	method = c('logreg', 'indep', 'loc', 'cont'),
 	loc.ind =  NULL,
 	keepX = 5,
 	ng = 2,
@@ -28,7 +28,7 @@ integrativeME(
   \item{data.cat}{clinical categorical data. The number of clinical factors is usually very small. Data should be sorted according to the \code{type} class vector.}
   \item{data.cont}{microarray data. Data should be sorted according to the \code{type} class vector.}
   \item{type}{vector indicating the class of each observation or sample. The vector should be coded 0 and 1 and sorted.}
-  \item{select}{gene selection method to be applied in the first step. RF = random forests (wrapper method), student = t-test (filter method) and sPLS = sparse PLS, see also \code{\link[integrOmics]{spls}} to select genes according to the clinical factors.}
+  \item{select}{gene selection method to be applied in the first step. RF = random forests (wrapper method), student = t-test (filter method) and sPLS = sparse PLS, see also \code{\link[mixOmics]{spls}} to select genes according to the clinical factors.}
   \item{method}{variant of ME to use to combine both types of variables, see also \code{\link{MEfunctions}}.}
   \item{loc.ind}{if \code{method = 'loc'}, then the index of the location variable is needed.}
   \item{keepX}{number of genes to select. Should be set to a small value.}
@@ -42,6 +42,8 @@ integrativeME(
 Clinical variables should all be categorical and should not contain any 0 values.
 
 The samples in \code{data.cat} and \code{data.cont} should be ordered according to class vector \code{type}.
+
+method = 'cont' is for continuous data only, whereas 'logreg', 'indep' and 'loc' combine both continuous and categorical variables together.
 
 If \code{method = 'logreg'}, some warning messages may appear:  'fitted probabilities numerically 0 or 1 occurred' for binomial GLMs, see Venables \& Ripley (2002, pp. 197-8).
 

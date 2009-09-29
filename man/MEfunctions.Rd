@@ -3,6 +3,7 @@
 \alias{MEindep}
 \alias{MElogreg}
 \alias{MEloc}
+\alias{MEcont}
 \alias{MEfunctions}
 
 \title{Internal gating functions for integrative Mixture of Experts methodology}
@@ -13,6 +14,9 @@ Different internal gating functions (or models) are proposed within mixture of e
 
 
 \usage{
+
+MEcont(jcross, train, test, n, nv, ng, indclass, data.cont, prop.kmeans, means.kmeans, var.kmeans)
+
 MEindep(jcross, train, test, n, nq, nv, ng, indclass, data.cat, data.cont, prop.kmeans, means.kmeans, var.kmeans)
 
 MElogreg(jcross, train, test, n, nq, nv, ng, indclass, data.cat, data.cont, prop.kmeans)

@@ -33,7 +33,7 @@ integrativeME = function(
 	data.cont,
 	type,
 	select = c('RF', 'student', 'sPLS'),
-	method = c('logreg', 'indep', 'loc'),
+	method = c('logreg', 'indep', 'loc', 'cont'),
 	loc.ind =  NULL,
 	keepX = 5,
 	ng = 2,
@@ -127,7 +127,7 @@ cat('selecting genes ...', '\n')
 #-------------------------select with sPLS regression or canonical, only regression for cont! --------------
 if(select == 'sPLS'){
 
-if(mode.sPLS == 'regression') {spls.res = spls(X, type[train], ncomp=1, keepX = keepX, mode = mode.sPLS)} else {spls.res = spls(X, Y = data.unmap[train,], ncomp=1, keepX = keepX, mode = mode.sPLS, scaleY = FALSE)}
+if(mode.sPLS == 'regression') {spls.res = spls(X, Y = as.numeric(type[train]), ncomp=1, keepX = keepX, mode = mode.sPLS)} else {spls.res = spls(as.matrix(X), Y = data.unmap[train,], ncomp=1, keepX = keepX, mode = mode.sPLS, scaleY = FALSE)}
 
 list.gene = names(which(spls.res$loadings$X[,1] != 0))
 
@@ -136,7 +136,6 @@ list.gene = names(which(spls.res$loadings$X[,1] != 0))
 
 #-------------------------select with RF --------------
 if(select == 'RF'){
-library(randomForest)
 
 rf = randomForest(X, as.factor(type[train]), ntree=1000, importance=TRUE)
 list.gene = names(sort(rf$importance[,3], decreasing=TRUE)[1:keepX])   #accurancy imp
@@ -159,6 +158,20 @@ if(res.kmeans$continue ==TRUE){    # condition coming from K-means clusters
 
 # ------------ choose the ME gating function ---------
 cat('ngme full \n')
+
+if(method == 'cont') res.ME = MEcont(
+	jcross, 
+	train, 
+	test, 
+	n, 
+	nv, 
+	ng, 
+	indclass, 
+	data.cont = data.cont[, list.gene], 
+	prop.kmeans = res.kmeans$prop.kmeans, 
+	means.kmeans = res.kmeans$means.kmeans, 
+	var.kmeans = res.kmeans$var.kmeans)
+
 if(method == 'indep') res.ME = MEindep(
 	jcross, 
 	train, 
@@ -204,7 +217,7 @@ if(method == 'loc') res.ME = MEloc(
 	var.kmeans = res.kmeans$var.kmeans,
 	loc.ind)
 
-#if(method == 'cont') source('NGMEcont.R')
+
 } else {ktest=ktest-1; jcross=nlevels(crossval) +1}
 
 

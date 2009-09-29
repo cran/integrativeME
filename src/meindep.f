@@ -87,7 +87,7 @@ c	  print *,'lambda(i,xc(j,i), k)',lambda(i,xc(j,i), k)
 250         continue
 300       continue
 
-c KA : I increased the limit from 175 to 250
+c KA : I increased the limit from 175 to 200
 	  if (al(k).gt.200.) then
 	    al(k)=0.
 	    goto 400

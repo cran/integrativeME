@@ -24,7 +24,12 @@ kmeans.init=function(data.cont){
 continue = TRUE
 cl <- kmeans(data.cont, 2, nstart = 5)
 
-if(is.null(nrow(data.cont[cl$cluster==1,])) | is.null(nrow(data.cont[cl$cluster==2,]))){continue=FALSE}else{if(nrow(data.cont[cl$cluster==1,]) <= 1 | nrow(data.cont[cl$cluster==2,]) <= 1){continue = FALSE}}
+#if(is.null(nrow(data.cont[cl$cluster==1,])) | is.null(nrow(data.cont[cl$cluster==2,]))){continue=FALSE}else{if(nrow(data.cont[cl$cluster==1,]) <= 1 | nrow(data.cont[cl$cluster==2,]) <= 1){continue = FALSE}}
+
+
+if(is.null(nrow(data.cont[cl$cluster==1,])) | is.null(nrow(data.cont[cl$cluster==2,]))) continue=FALSE
+if(nrow(data.cont[cl$cluster==1,]) <= 1 | nrow(data.cont[cl$cluster==2,]) <= 1) continue = FALSE
+
 
 if(continue == TRUE){
 clust1 = data.cont[cl$cluster==1,]

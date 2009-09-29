@@ -1,9 +1,9 @@
 Package: integrativeME
 Type: Package
 Title: integrative mixture of experts
-Version: 1.1
+Version: 1.2
 Date: 2009-09-29
-Depends: mclust, integrOmics, randomForest
+Depends: R (>= 2.10), mclust, mixOmics, randomForest
 Author: Kim-Anh Le Cao
 Maintainer: Kim-Anh Le Cao <k.lecao@uq.edu.au>
 Description: Mixture of experts models (Jacobs et al., 1991) were
@@ -19,6 +19,6 @@ Description: Mixture of experts models (Jacobs et al., 1991) were
         propose to apply different gene selection procedures as a first
         step.
 License: GPL (>= 2)
-Packaged: 2009-10-14 07:15:34 UTC; k.lecao
+Packaged: 2012-07-23 10:09:21 UTC; ripley
 Repository: CRAN
-Date/Publication: 2009-10-14 09:59:57
+Date/Publication: 2012-07-23 10:35:32
