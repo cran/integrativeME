@@ -1,0 +1,15 @@
+
+useDynLib(integrativeME)
+
+export(MEindep, norm.indep, initmain.indep, main.indep, kmeans.init, MElogreg, norm.logreg, initmain.logreg, main.logreg,
+MEloc, norm.loc, initmain.loc, main.loc,
+counts,
+integrativeME
+)
+
+
+#S3method()
+
+
+
+
